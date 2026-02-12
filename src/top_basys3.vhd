@@ -56,12 +56,39 @@ end top_basys3;
 architecture top_basys3_arch of top_basys3 is 
 	
     -- declare the component of your top-level design
-
+    --make vectors?
+    component ripple_adder is
+        port (
+            A     : in std_logic_vector(3 downto 0);
+            B     : in std_logic_vector(3 downto 0);
+            Cin   : in std_logic;
+            S     : out std_logic_vector(3 downto 0);
+            Cout  : out std_logic
+            );
+        end component ripple_adder;
     -- declare any signals you will need	
-  
+        
+        signal w_carry  : STD_LOGIC_VECTOR(2 downto 0);
 begin
 	-- PORT MAPS --------------------
-   
+	 ripple_instance: ripple_adder
+	 port map(
+	   Cin => sw(0),
+	   A(0) => sw(4),
+	   A(1) => sw(3),
+	   A(2) => sw(2),
+	   A(3) => sw(1),
+	   B(0) => sw(15),
+	   B(1) => sw(14),
+	   B(2) => sw(13),
+	   B(3) => sw(12),
+	   S(0) => led(0),
+	   S(1) => led(1),
+	   S(2) => led(2),
+	   S(3) => led(3),
+	   Cout => led(15)
+	 );
+    
 	---------------------------------
 	
 	-- CONCURRENT STATEMENTS --------
